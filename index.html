@@ -1,0 +1,175 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <meta name="theme-color" content="#fff8ee" />
+    <meta name="description" content="把每一次坚持，变成一颗可以实现心愿的星星。" />
+    <link rel="manifest" href="manifest.webmanifest" />
+    <link rel="stylesheet" href="styles.css" />
+    <title>拾星 · 习惯打卡</title>
+  </head>
+  <body>
+    <div class="app-shell">
+      <header class="topbar">
+        <div>
+          <p class="eyebrow" id="todayLabel"></p>
+          <h1 id="greeting">今天也要闪闪发光</h1>
+        </div>
+        <button class="star-balance" id="starBalance" aria-label="当前星星数量">
+          <span class="star-icon">★</span>
+          <strong id="starCount">0</strong>
+        </button>
+      </header>
+
+      <main>
+        <section class="view active" id="todayView" data-view="today">
+          <article class="hero-card">
+            <div class="hero-copy">
+              <span class="hero-kicker">今日进度</span>
+              <strong id="progressText">0 / 0</strong>
+              <p id="encouragement">从一个小小的行动开始吧。</p>
+            </div>
+            <div class="progress-ring" id="progressRing" style="--progress: 0">
+              <div>
+                <strong id="progressPercent">0%</strong>
+                <span>完成</span>
+              </div>
+            </div>
+            <div class="hero-stars" aria-hidden="true">✦</div>
+          </article>
+
+          <div class="section-heading">
+            <div>
+              <p class="eyebrow">TODAY</p>
+              <h2>今日习惯</h2>
+            </div>
+            <button class="text-button" data-open-modal="habit">＋ 添加</button>
+          </div>
+          <div class="habit-list" id="todayHabitList"></div>
+          <div class="empty-state hidden" id="todayEmpty">
+            <div class="empty-illustration">🌱</div>
+            <h3>种下第一个习惯</h3>
+            <p>每天完成一点点，让星星慢慢装满口袋。</p>
+            <button class="primary-button" data-open-modal="habit">创建习惯</button>
+          </div>
+
+          <article class="wish-teaser" id="wishTeaser">
+            <div class="wish-teaser-icon">🎁</div>
+            <div>
+              <span>下一个心愿</span>
+              <strong id="nextWishName">还没有心愿</strong>
+              <div class="mini-progress"><i id="wishProgressBar"></i></div>
+              <small id="wishProgressText">创建一个想兑换的奖励吧</small>
+            </div>
+            <button class="circle-arrow" data-nav="wishes" aria-label="查看心愿">›</button>
+          </article>
+        </section>
+
+        <section class="view" id="habitsView" data-view="habits">
+          <div class="page-heading">
+            <div>
+              <p class="eyebrow">MY ROUTINES</p>
+              <h2>我的习惯</h2>
+            </div>
+            <button class="round-add" data-open-modal="habit" aria-label="添加习惯">＋</button>
+          </div>
+          <div class="stats-grid">
+            <article><span>本周完成</span><strong id="weekCompletions">0</strong><small>次打卡</small></article>
+            <article><span>最长连续</span><strong id="bestStreak">0</strong><small>天</small></article>
+          </div>
+          <div class="calendar-card">
+            <div class="calendar-title"><strong>最近 7 天</strong><span>坚持的痕迹</span></div>
+            <div class="week-strip" id="weekStrip"></div>
+          </div>
+          <div class="all-habits" id="allHabitList"></div>
+        </section>
+
+        <section class="view" id="wishesView" data-view="wishes">
+          <div class="page-heading">
+            <div>
+              <p class="eyebrow">WISH LIST</p>
+              <h2>心愿商店</h2>
+            </div>
+            <button class="round-add" data-open-modal="wish" aria-label="添加心愿">＋</button>
+          </div>
+          <article class="wallet-card">
+            <span>我的星星</span>
+            <div><b>★</b><strong id="walletStars">0</strong></div>
+            <p>每一次认真完成，都值得被奖励。</p>
+          </article>
+          <div class="filter-row">
+            <button class="filter-chip active" data-wish-filter="active">待兑换</button>
+            <button class="filter-chip" data-wish-filter="redeemed">已实现</button>
+          </div>
+          <div class="wish-grid" id="wishList"></div>
+          <div class="empty-state hidden" id="wishEmpty">
+            <div class="empty-illustration">☁️</div>
+            <h3>给坚持一个理由</h3>
+            <p>写下一个小心愿，用攒下的星星兑换它。</p>
+            <button class="primary-button" data-open-modal="wish">添加心愿</button>
+          </div>
+        </section>
+
+        <section class="view" id="profileView" data-view="profile">
+          <div class="page-heading">
+            <div>
+              <p class="eyebrow">MY SPACE</p>
+              <h2>我的小屋</h2>
+            </div>
+          </div>
+          <article class="profile-card">
+            <div class="avatar">✨</div>
+            <div><strong>追光的人</strong><span id="joinedDays">和拾星相伴第 1 天</span></div>
+          </article>
+          <div class="achievement-card">
+            <div class="section-heading compact"><div><p class="eyebrow">ACHIEVEMENTS</p><h2>闪光记录</h2></div></div>
+            <div class="achievement-grid">
+              <div><span>⭐</span><strong id="totalEarned">0</strong><small>累计星星</small></div>
+              <div><span>✅</span><strong id="totalChecks">0</strong><small>累计打卡</small></div>
+              <div><span>🎁</span><strong id="totalRedeemed">0</strong><small>实现心愿</small></div>
+            </div>
+          </div>
+          <div class="settings-list">
+            <button id="openWidget"><span class="setting-icon peach">▦</span><div><strong>桌面小组件</strong><small>快速查看与打卡</small></div><i>›</i></button>
+            <button id="installApp" class="hidden"><span class="setting-icon purple">↓</span><div><strong>安装到桌面</strong><small>像原生 App 一样使用</small></div><i>›</i></button>
+            <button id="exportData"><span class="setting-icon green">⇩</span><div><strong>导出数据</strong><small>备份习惯与心愿</small></div><i>›</i></button>
+            <button id="resetData"><span class="setting-icon gray">↻</span><div><strong>恢复示例数据</strong><small>重新体验默认内容</small></div><i>›</i></button>
+          </div>
+        </section>
+      </main>
+
+      <nav class="bottom-nav" aria-label="主导航">
+        <button class="active" data-nav="today"><span>⌂</span><small>今天</small></button>
+        <button data-nav="habits"><span>✓</span><small>习惯</small></button>
+        <button data-nav="wishes"><span>☆</span><small>心愿</small></button>
+        <button data-nav="profile"><span>♙</span><small>我的</small></button>
+      </nav>
+    </div>
+
+    <div class="modal-backdrop" id="modalBackdrop" aria-hidden="true">
+      <section class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+        <div class="modal-handle"></div>
+        <div class="modal-header"><h2 id="modalTitle">创建习惯</h2><button id="closeModal" aria-label="关闭">×</button></div>
+        <form id="habitForm" class="modal-form">
+          <label>习惯名称<input id="habitName" maxlength="18" placeholder="例如：阅读 20 分钟" required /></label>
+          <label>图标</label>
+          <div class="emoji-picker" id="habitEmojiPicker"></div>
+          <label>完成奖励<div class="number-field"><span>★</span><input id="habitReward" type="number" min="1" max="20" value="3" required /></div></label>
+          <label>每周目标<div class="day-picker" id="dayPicker"></div></label>
+          <button class="primary-button full" type="submit">保存习惯</button>
+        </form>
+        <form id="wishForm" class="modal-form hidden">
+          <label>心愿名称<input id="wishName" maxlength="20" placeholder="例如：看一场电影" required /></label>
+          <label>图标</label>
+          <div class="emoji-picker" id="wishEmojiPicker"></div>
+          <label>需要星星<div class="number-field"><span>★</span><input id="wishCost" type="number" min="1" max="999" value="30" required /></div></label>
+          <button class="primary-button full" type="submit">放入心愿单</button>
+        </form>
+      </section>
+    </div>
+
+    <div class="toast" id="toast" role="status"></div>
+    <script src="app.js"></script>
+  </body>
+</html>

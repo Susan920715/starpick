@@ -1,0 +1,18 @@
+{
+  "name": "拾星 · 习惯打卡",
+  "short_name": "拾星",
+  "description": "把每一次坚持，变成一颗可以实现心愿的星星。",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#fff8ee",
+  "theme_color": "#fff8ee",
+  "lang": "zh-CN",
+  "icons": [
+    {
+      "src": "icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
